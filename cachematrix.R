@@ -29,13 +29,19 @@ makeCacheMatrix <- function(a = matrix()) {
 # Otherwise it computes the inverse, sets it in the cache and returns it
 
 cacheSolve <- function(a, ...) {
+
+    #check if inverse has already been cached
     the_inverse <- a$get_inverse()
     if(!is.null(the_inverse)) {
         message("getting cached inverse")
         return(the_inverse)
     }
+    
+    #otherwise compute it and cache the result in CacheMatrix
     data <- a$get()
     the_inverse <- solve(data, ...)
     a$set_inverse(the_inverse)
+    
+    #return the computed inverse
     the_inverse
 }
